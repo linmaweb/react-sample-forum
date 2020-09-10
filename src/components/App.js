@@ -33,19 +33,12 @@ export default class App extends Component {
     const { selectedChannelId, selectedPersonId } = this.state;
 
     if (selectedChannelId) {
-      // set state to...
       this.setState({
-        // the existing state...
         ...this.state,
-        // but with messagesByChannelId set to:
         messagesByChannelId: {
-          // all the existing messages for all channels...
           ...this.state.messagesByChannelId,
-          // but with the messages for the selected channel replaced by:
           [selectedChannelId]: [
-            // all of the existing messages...
             ...this.state.messagesByChannelId[selectedChannelId],
-            // plus this new one.
             createMessage(
               text,
               nextId(this.state.messagesByChannelId[selectedChannelId])
@@ -56,7 +49,6 @@ export default class App extends Component {
     }
 
     if (selectedPersonId) {
-      // same kind of thing as above
       this.setState({
         ...this.state,
         messagesByPersonId: {
@@ -73,13 +65,6 @@ export default class App extends Component {
     }
   };
 
-  // This is function is a genericized version of the two setState calls above,
-  // but it's even harder to decipher what's going on. I left it here so you can
-  // see how it works and make up your own mind whether you want to do it this way,
-  // or the verbose-but-more-explicit way.
-  //
-  // Alternatively, if this makes your eyes bleed (I don't blame you), look at the
-  // Immutable.js library to make this sort of thing easier
   addMessage(type, text, selectedId) {
     this.setState({
       ...this.state,
