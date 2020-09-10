@@ -1,51 +1,38 @@
-import React, {Component} from 'react';
-import SidebarPane from './SidebarPane';
-import ChatPane from './ChatPane';
-import EmptyChatPane from './EmptyChatPane';
-import { channels, people, createFakeActivity } from './static-data';
+import React, { Component } from "react";
+import SidebarPane from "./SidebarPane";
+import ChatPane from "./ChatPane";
+import EmptyChatPane from "./EmptyChatPane";
+import { channels, people } from "../config";
+import { createFakeActivity, nextId, createMessage } from "../funcs";
 
-
-function nextId(messages) {
-  return messages.length ? messages[messages.length - 1].id + 1 : 0
-}
-
-function createMessage(text, messageId) {
-  return {
-    id: messageId,
-    userName: 'Myself',
-    text: text,
-    timestamp: new Date()
-  };
-}
-
-export default class Root extends Component {
+export default class App extends Component {
   state = {
     channels,
     people,
     messagesByChannelId: createFakeActivity(channels, 15),
     messagesByPersonId: createFakeActivity(people, 5),
     selectedChannelId: null,
-    selectedPersonId: null
+    selectedPersonId: null,
   };
 
   handleChannelSelected = (channelId) => {
     this.setState({
       selectedChannelId: channelId,
-      selectedPersonId: null
+      selectedPersonId: null,
     });
-  }
+  };
 
   handlePersonSelected = (personId) => {
     this.setState({
       selectedPersonId: personId,
-      selectedChannelId: null
+      selectedChannelId: null,
     });
-  }
+  };
 
   handleSentMessage = (text) => {
-    const {selectedChannelId, selectedPersonId} = this.state;
+    const { selectedChannelId, selectedPersonId } = this.state;
 
-    if(selectedChannelId) {
+    if (selectedChannelId) {
       // set state to...
       this.setState({
         // the existing state...
@@ -59,13 +46,16 @@ export default class Root extends Component {
             // all of the existing messages...
             ...this.state.messagesByChannelId[selectedChannelId],
             // plus this new one.
-            createMessage(text, nextId(this.state.messagesByChannelId[selectedChannelId]))
-          ]
-        }
+            createMessage(
+              text,
+              nextId(this.state.messagesByChannelId[selectedChannelId])
+            ),
+          ],
+        },
       });
     }
 
-    if(selectedPersonId) {
+    if (selectedPersonId) {
       // same kind of thing as above
       this.setState({
         ...this.state,
@@ -73,12 +63,15 @@ export default class Root extends Component {
           ...this.state.messagesByPersonId,
           [selectedPersonId]: [
             ...this.state.messagesByPersonId[selectedPersonId],
-            createMessage(text, nextId(this.state.messagesByPersonId[selectedPersonId]))
-          ]
-        }
+            createMessage(
+              text,
+              nextId(this.state.messagesByPersonId[selectedPersonId])
+            ),
+          ],
+        },
       });
     }
-  }
+  };
 
   // This is function is a genericized version of the two setState calls above,
   // but it's even harder to decipher what's going on. I left it here so you can
@@ -94,41 +87,49 @@ export default class Root extends Component {
         ...this.state[type],
         [selectedId]: [
           ...this.state[type][selectedId],
-          createMessage(text, nextId(this.state[type][selectedId]))
-        ]
-      }
+          createMessage(text, nextId(this.state[type][selectedId])),
+        ],
+      },
     });
   }
 
   render() {
-    const {channels, people, selectedChannelId, selectedPersonId} = this.state;
+    const {
+      channels,
+      people,
+      selectedChannelId,
+      selectedPersonId,
+    } = this.state;
 
     let messages = [];
     let isSomethingSelected = false;
-    if(selectedChannelId) {
+    if (selectedChannelId) {
       messages = this.state.messagesByChannelId[selectedChannelId];
       isSomethingSelected = true;
     }
-    if(selectedPersonId) {
+    if (selectedPersonId) {
       messages = this.state.messagesByPersonId[selectedPersonId];
       isSomethingSelected = true;
     }
 
     return (
-      <div className='container'>
+      <div className="container">
         <SidebarPane
           channels={channels}
           people={people}
           onChannelSelected={this.handleChannelSelected}
           onPersonSelected={this.handlePersonSelected}
           selectedChannelId={selectedChannelId}
-          selectedPersonId={selectedPersonId} />
-        {isSomethingSelected ?
+          selectedPersonId={selectedPersonId}
+        />
+        {isSomethingSelected ? (
           <ChatPane
             messages={messages}
-            onSendMessage={this.handleSentMessage} />
-          : <EmptyChatPane />
-        }
+            onSendMessage={this.handleSentMessage}
+          />
+        ) : (
+          <EmptyChatPane />
+        )}
       </div>
     );
   }

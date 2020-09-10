@@ -1,16 +1,63 @@
 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body,
+#root,
+.container {
+  height: 100%;
+}
+
+body {
+  color: #444;
+  background: #eee;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+}
+
+.header {
+  background: #4a154b;
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.header .title {
+  font-size: 4.2rem;
+  margin-bottom: 0.4rem;
+  text-align: center;
+  width: 100%;
+}
+
+* {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
 }
 
-html, body, #root, .container {
-  height: 100%;
-}
 .sidebar-pane h5 {
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 18px;
   margin-bottom: 1em;
+  color: rgba(255, 190, 8, 1);
 }
 .channel-header {
   margin-top: 1em;
@@ -22,20 +69,16 @@ html, body, #root, .container {
   display: flex;
 }
 .sidebar-pane {
-  width: 320px;
-  background-color: #314C75;
+  width: 250px;
+  background-color: #59195b;
   color: #fff;
-  padding-left: 1em;
+  padding: 2.5em 0 1.5em 1.5em;
   overflow-y: auto;
-  padding-bottom: 1em;
 }
 .chat-pane {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-.chat-pane--empty {
-
 }
 .empty-state-help {
   text-align: center;
@@ -44,11 +87,13 @@ html, body, #root, .container {
   position: relative;
   top: 4em;
 }
-.channel-name, .person-name {
+.channel-name,
+.person-name {
   color: #eee;
   font-weight: 300;
   line-height: 1.4em;
-  padding-left: 0.2em;
+  padding: 0.1em 0 0.1em 0.25em;
+  font-size: 0.85em;
   cursor: pointer;
 }
 
@@ -56,12 +101,13 @@ html, body, #root, .container {
   color: #fff;
   font-weight: bolder;
 }
-.channel-name--selected, .person-name--selected {
-  background-color: rgba(255, 193, 7, 1.0);
-  color: #444;
+.channel-name--selected,
+.person-name--selected {
+  background-color: rgba(255, 190, 8, 1);
+  color: #4a154b;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
-  box-shadow: 0 1px 0 rgba(255, 193, 7, 0.5);
+  box-shadow: 0 1px 0 rgba(255, 190, 8, 0.5);
 }
 .channel-name .hash {
   margin-right: 0.3em;
@@ -97,9 +143,9 @@ html, body, #root, .container {
 }
 .message-list--empty {
   text-align: center;
-  margin-top: 1em;
+  margin-top: 2em;
   font-size: 2.5em;
-  color: #7B97C1;
+  color: #ccc;
 }
 .anchor-messages-bottom {
   position: absolute;
@@ -118,16 +164,21 @@ html, body, #root, .container {
   font-size: 0.8em;
 }
 
-.message--text {}
-
 .message--avatar {
   width: 38px;
   height: 38px;
-  display: inline-block;
   float: left;
   border: 1px solid #ddd;
   margin-right: 0.5em;
   border-radius: 4px;
+}
+
+.message--avatar .fa {
+  text-align: center;
+  font-size: 3rem;
+  padding-top: 0.3rem;
+  width: 100%;
+  color: #812184;
 }
 
 .message {
@@ -135,8 +186,4 @@ html, body, #root, .container {
   font-size: 14px;
   color: #333;
   line-height: 1.3em;
-}
-.App-title{
-  font-size:22px;
-  margin:40px 15px 40px 0;
 }

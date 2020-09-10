@@ -12,7 +12,6 @@ const SidebarPane = ({
   onPersonSelected
 }) => (
   <div className='sidebar-pane'>
-    <h1 className="App-title">Sample Reddit with Static Data</h1>
     <ChannelList
       channels={channels}
       selectedId={selectedChannelId}
