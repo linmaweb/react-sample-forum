@@ -1,6 +1,6 @@
 import { people } from "./config";
 
-function generateFakeMessages(count) {
+const generateFakeMessages = (count) => {
   return Array.from(Array(count).keys()).map((i) => {
     const userName = randomUser();
     return {
@@ -10,33 +10,33 @@ function generateFakeMessages(count) {
       timestamp: new Date(),
     };
   });
-}
+};
 
-function randomUser() {
+const randomUser = () => {
   return people.map((p) => p.name)[
     Math.floor(Math.random() * 1000) % people.length
   ];
-}
+};
 
-function createFakeActivity(channels, maxMessages) {
+const createFakeActivity = (channels, maxMessages) => {
   return channels.reduce((result, channel) => {
     const rndNum = Math.floor(Math.random() * maxMessages);
     result[channel.id] = generateFakeMessages(rndNum);
     return result;
   }, {});
-}
+};
 
-function nextId(messages) {
+const nextId = (messages) => {
   return messages.length ? messages[messages.length - 1].id + 1 : 0;
-}
+};
 
-function createMessage(text, messageId) {
+const createMessage = (text, messageId) => {
   return {
     id: messageId,
     userName: "Myself",
     text: text,
     timestamp: new Date(),
   };
-}
+};
 
 export { createFakeActivity, nextId, createMessage };

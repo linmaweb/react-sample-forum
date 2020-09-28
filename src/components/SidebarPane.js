@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ChannelList from './ChannelList';
-import PeopleList from './PeopleList';
+import React from "react";
+import ChannelList from "./ChannelList";
+import PeopleList from "./PeopleList";
 
 const SidebarPane = ({
   channels,
@@ -9,27 +8,20 @@ const SidebarPane = ({
   selectedChannelId,
   selectedPersonId,
   onChannelSelected,
-  onPersonSelected
+  onPersonSelected,
 }) => (
-  <div className='sidebar-pane'>
+  <div className="sidebar-pane">
     <ChannelList
       channels={channels}
       selectedId={selectedChannelId}
-      onChannelSelected={onChannelSelected} />
+      onChannelSelected={onChannelSelected}
+    />
     <PeopleList
       people={people}
       selectedId={selectedPersonId}
-      onPersonSelected={onPersonSelected} />
+      onPersonSelected={onPersonSelected}
+    />
   </div>
 );
-
-SidebarPane.propTypes = {
-  channels: PropTypes.array.isRequired,
-  people: PropTypes.array.isRequired,
-  onChannelSelected: PropTypes.func.isRequired,
-  onPersonSelected: PropTypes.func.isRequired,
-  selectedChannelId: PropTypes.number,
-  selectedPersonId: PropTypes.number
-};
 
 export default SidebarPane;

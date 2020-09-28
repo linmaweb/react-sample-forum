@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 const Message = ({ message }) => (
   <div className="message">
@@ -17,14 +16,5 @@ const Message = ({ message }) => (
     </p>
   </div>
 );
-
-Message.propTypes = {
-  message: PropTypes.shape({
-    id: PropTypes.number,
-    text: PropTypes.string,
-    userName: PropTypes.string,
-    timestamp: PropTypes.object,
-  }),
-};
 
 export default Message;

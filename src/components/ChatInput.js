@@ -1,42 +1,32 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
 
-export default class ChatInput extends Component {
-  static propTypes = {
-    onSendMessage: PropTypes.func.isRequired
-  };
+const ChatInput = ({ onSendMessage }) => {
+  const [text, setText] = useState("");
 
-  state = {text: ''};
-
-  setText(text) {
-    this.setState({ text });
-  }
-
-  handleKeyPress = (event) => {
-    if(!this.state.text) {
+  const handleKeyPress = (e) => {
+    if (!text) {
       return;
     }
 
-    if(event.key === 'Enter') {
-      this.props.onSendMessage(this.state.text);
-      this.setText('');
+    if (e.key === "Enter") {
+      onSendMessage(text);
+      setText("");
     }
-  }
+  };
 
-  handleChange = (event) => {
-    this.setText(event.target.value);
-  }
+  return (
+    <div className="chat-input">
+      <input
+        type="text"
+        placeholder="Type your message here. Press Enter to send."
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
+        onKeyPress={handleKeyPress}
+        value={text}
+      />
+    </div>
+  );
+};
 
-  render () {
-    return (
-      <div className='chat-input'>
-        <input
-          type='text'
-          placeholder='Type your message here. Press Enter to send.'
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-          value={this.state.text} />
-      </div>
-    );
-  }
-}
+export default ChatInput;
