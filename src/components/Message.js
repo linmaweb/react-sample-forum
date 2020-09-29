@@ -9,7 +9,7 @@ const Message = ({ message }) => (
       {message.userName}
     </span>
     <span className="message--time" key={message.id + "_time"}>
-      {message.timestamp.toString()}
+      {message.timestamp.toUTCString()}
     </span>
     <p className="message--text" key={message.id + "_text"}>
       {message.text}

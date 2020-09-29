@@ -1,5 +1,3 @@
-const headerTitle = "React Sample Project: Forum";
-
 const channels = [
   { id: 1, name: "Computer" },
   { id: 2, name: "Sports", hasUnreads: true },
@@ -19,4 +17,4 @@ const people = [
   { id: 7, name: "Greg" },
 ];
 
-export { channels, people, headerTitle };
+export { channels, people };

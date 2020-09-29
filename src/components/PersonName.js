@@ -7,6 +7,7 @@ const PersonName = ({ person, isSelected, onClick }) => {
     "person-name--unread": person.hasUnreads,
     "person-name--selected": isSelected,
   });
+
   return (
     <div key={person.id} className={classes} onClick={onClick}>
       {person.name}

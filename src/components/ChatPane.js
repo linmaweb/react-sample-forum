@@ -1,35 +1,27 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef } from "react";
 import Header from "./Header";
-import { headerTitle } from "../config";
 import MessageList from "./MessageList";
 import EmptyMessageList from "./EmptyMessageList";
 import ChatInput from "./ChatInput";
 
-export default class ChatPane extends Component {
-  componentDidMount() {
-    if (this.messageList) {
-      this.messageList.scrollToBottom();
-    }
-  }
+const ChatPane = ({ messages, onSendMessage }) => {
+  const chatPane = useRef(null);
 
-  render() {
-    const { messages, onSendMessage } = this.props;
+  useEffect(() => {
+    chatPane.current.scrollTop = chatPane.current.scrollHeight;
+  }, [messages]);
 
-    return (
-      <div className="chat-pane">
-        <Header title={headerTitle} />
-        {messages.length > 0 ? (
-          <MessageList
-            messages={messages}
-            ref={(cmp) => {
-              this.messageList = cmp;
-            }}
-          />
-        ) : (
-          <EmptyMessageList />
-        )}
-        <ChatInput onSendMessage={onSendMessage} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="chat-pane" ref={chatPane}>
+      <Header />
+      {messages.length > 0 ? (
+        <MessageList messages={messages} />
+      ) : (
+        <EmptyMessageList />
+      )}
+      <ChatInput onSendMessage={onSendMessage} />
+    </div>
+  );
+};
+
+export default ChatPane;

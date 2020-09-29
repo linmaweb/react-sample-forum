@@ -18,7 +18,7 @@ const randomUser = () => {
   ];
 };
 
-const createFakeActivity = (channels, maxMessages) => {
+const generateData = (channels, maxMessages) => {
   return channels.reduce((result, channel) => {
     const rndNum = Math.floor(Math.random() * maxMessages);
     result[channel.id] = generateFakeMessages(rndNum);
@@ -39,4 +39,4 @@ const createMessage = (text, messageId) => {
   };
 };
 
-export { createFakeActivity, nextId, createMessage };
+export { generateData, nextId, createMessage };
